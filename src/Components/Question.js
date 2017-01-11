@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import Answer from './Answer.js'
+import React from 'react';
+import Answer from './Answer';
 
-export default class Questions extends Component {
+export default class Question extends React.Component {
   render() {
-    const { title, answers, id } = this.props
+
+    let {title, answers, id} = { ...this.props.data }
     return (
-      <div className="question">
-        <h3 className="question-title">{title}</h3>
-        {answers.map((answer, i) =>
+      <article className='question'>
+        <h2>{title}</h2>
+        {answers.map((answer, index) =>
           <Answer
-            key={i}
+            increment={(score) => this.props.increment(score)}
             id={id}
-            answer={answer}
-          />
+            key={index}
+            data={answer}/>
         )}
-      </div>
+      </article>
     );
   }
 }

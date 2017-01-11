@@ -1,24 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Question from './Question';
 
-export default class Quiz extends Component {
-
+export default class Quiz extends React.Component {
   render() {
+    let {title, questions } = { ...this.props.data }
     return (
-      <div>
-        <h1 className="pageTitle">{this.props.quizzes[0].title}</h1>
-        <section>
-          {this.props.quizzes[0].questions.map((question, index) =>
-            <Question
-              className="questionContainer"
-              key={question.id}
-              id={index}
-              title={question.title}
-              answers={question.answers}
-            />
-					)}
-					</section>
-      </div>
-    )
+      <section className='Quiz'>
+        <h1> {title} </h1>
+        {questions.map(question =>
+          <Question
+            increment={(score) => this.props.increment(score)}
+            className='question'
+            key={question.id}
+            data={question}
+          />
+        )}
+      </section>
+    );
   }
 }

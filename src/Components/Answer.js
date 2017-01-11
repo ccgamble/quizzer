@@ -1,24 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-
-export default class Answer extends Component {
-
+export default class Answer extends React.Component {
   render() {
-    const { id, answer } = this.props
-
+    let {title, score } = {...this.props.data};
     return (
-      <div className="answer-container">
-        <label>
-          <input
-						id="radio-button"
-            type="radio"
-            value={answer.score}
-            name={id}
-
-          />
-          {answer.title}
-        </label>
-      </div>
+      <label >
+        <input
+          onClick={() => this.props.increment( score )}
+          name={this.props.id}
+          className='answer'
+          type='radio'
+          value={score}
+        />
+        {title}
+        <br/>
+      </label>
     );
   }
 }
