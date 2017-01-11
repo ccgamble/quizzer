@@ -23,18 +23,8 @@ export default class App extends React.Component {
       });
   }
 
-  handleIncrementScore(score){
-    const newScore = this.state.score + score;
-    this.setState({score:  newScore });
-  }
 
   handleSubmit(){
-		
-    let currentScore = this.state.score;
-    axios.post(`/scores/${currentScore}`)
-    .then((response) => {
-      console.log(response);
-    });
   }
 
   render() {
@@ -42,14 +32,14 @@ export default class App extends React.Component {
     return (
       <main>
         {quizzes
-          ? quizzes.map(quiz => <Quiz
-            increment={(score) => this.handleIncrementScore(score) }
+          ? quizzes.map(quiz =>
+						<Quiz
             className='quiz'
             data={quiz}
             key={quiz.id}/>)
           : <p>Loading Quizzes...</p>
         }
-        <button onClick={() => this.handleSubmit()}>Submit</button>
+        <button>Submit</button>
       </main>
     );
   }
